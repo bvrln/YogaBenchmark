@@ -5,6 +5,8 @@ const competitorBenchmarkBody = document.getElementById("competitor-benchmark-bo
 const competitorDetail = document.getElementById("competitor-detail");
 const competitorOffersBody = document.getElementById("competitor-offers-body");
 const statusLine = document.getElementById("status-line");
+const refreshButton = document.getElementById("refresh-pricing");
+const refreshStatus = document.getElementById("refresh-status");
 window.__app_js_loaded = true;
 
 const fallbackOffers = [
@@ -123,6 +125,12 @@ function isOurStudio(row) {
 function setStatus(message) {
   if (statusLine) {
     statusLine.textContent = message;
+  }
+}
+
+function setRefreshStatus(message) {
+  if (refreshStatus) {
+    refreshStatus.textContent = message;
   }
 }
 
@@ -388,6 +396,9 @@ function togglePin(row) {
     renderCompetitorRows(window._competitors);
   }
   updatePinnedMarkers();
+  if (refreshStatus) {
+    setRefreshStatus("Pricing refresh recommended");
+  }
 }
 
 
@@ -769,7 +780,58 @@ loadPinnedCompetitors().then(() => {
     renderCompetitorRows(window._competitors);
     updatePinnedMarkers();
   }
+  loadRefreshStatus();
 });
+
+let refreshPoll = null;
+
+function loadRefreshStatus() {
+  fetch("/api/refresh-status")
+    .then((response) => (response.ok ? response.json() : Promise.reject()))
+    .then((data) => {
+      if (!data) {
+        return;
+      }
+      const message = data.message || "Pricing refresh idle";
+      setRefreshStatus(message);
+      if (refreshButton) {
+        refreshButton.disabled = Boolean(data.in_progress);
+      }
+      if (data.in_progress && !refreshPoll) {
+        refreshPoll = setInterval(loadRefreshStatus, 5000);
+      }
+      if (!data.in_progress && refreshPoll) {
+        clearInterval(refreshPoll);
+        refreshPoll = null;
+      }
+    })
+    .catch(() => {});
+}
+
+if (refreshButton) {
+  refreshButton.addEventListener("click", () => {
+    const limit = pinnedCompetitors.size ? pinnedCompetitors.size : 10;
+    setRefreshStatus("Pricing refresh: starting...");
+    refreshButton.disabled = true;
+    fetch("/api/refresh-pricing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ limit }),
+    })
+      .then((response) => (response.ok ? response.json() : Promise.reject()))
+      .then((data) => {
+        const message = data.message || "Pricing refresh running";
+        setRefreshStatus(message);
+        if (!refreshPoll) {
+          refreshPoll = setInterval(loadRefreshStatus, 5000);
+        }
+      })
+      .catch(() => {
+        setRefreshStatus("Pricing refresh failed to start");
+        refreshButton.disabled = false;
+      });
+  });
+}
 
 function updateCompetitorDetailPinButton(row) {
   if (!row || !row.competitor_id) {

@@ -146,6 +146,17 @@ body {
   text-align: center;
 }
 
+.refresh-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.refresh-row .note {
+  margin: 0;
+}
+
 .pinned-row {
   background: #f0f5e6;
 }

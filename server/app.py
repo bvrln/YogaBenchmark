@@ -3,6 +3,10 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 from typing import Any
+import subprocess
+import sys
+import threading
+from datetime import datetime, timezone
 
 import json
 
@@ -21,8 +25,12 @@ SAMPLE_COMPETITORS_PATH = WEB_DIR / "sample_competitors.csv"
 SAMPLE_OFFERS_DETAILED_PATH = WEB_DIR / "sample_offers_detailed.csv"
 PINNED_PATH = DATA_DIR / "pinned_competitors.json"
 OWN_STUDIO_PATH = DATA_DIR / "own_studio.json"
+REFRESH_STATUS_PATH = DATA_DIR / "pricing_refresh_status.json"
+PRICING_CRAWL_PATH = BASE_DIR / "analysis" / "pricing_crawl.py"
 
 app = FastAPI(title="Yoga Benchmark")
+_refresh_lock = threading.Lock()
+_refresh_in_progress = False
 
 
 def _load_csv(path: Path) -> list[dict[str, Any]]:
@@ -121,6 +129,77 @@ def _build_competitor_rows() -> list[dict[str, str]]:
     return competitors
 
 
+def _write_refresh_status(payload: dict[str, Any]) -> None:
+    REFRESH_STATUS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    REFRESH_STATUS_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def _load_refresh_status() -> dict[str, Any]:
+    if not REFRESH_STATUS_PATH.exists():
+        return {"status": "idle", "message": "Pricing refresh idle", "in_progress": False}
+    try:
+        data = json.loads(REFRESH_STATUS_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {"status": "idle", "message": "Pricing refresh idle", "in_progress": False}
+    if not isinstance(data, dict):
+        return {"status": "idle", "message": "Pricing refresh idle", "in_progress": False}
+    data["in_progress"] = bool(data.get("in_progress"))
+    return data
+
+
+def _run_pricing_refresh(limit: int) -> None:
+    global _refresh_in_progress
+    start_time = datetime.now(timezone.utc).isoformat()
+    _write_refresh_status(
+        {
+            "status": "running",
+            "message": "Pricing refresh running",
+            "started_at": start_time,
+            "in_progress": True,
+        }
+    )
+    try:
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(PRICING_CRAWL_PATH),
+                "--limit",
+                str(limit),
+                "--update-competitors",
+                "--use-playwright",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=1800,
+        )
+        status = "success" if result.returncode == 0 else "failed"
+        message = "Pricing refresh complete" if result.returncode == 0 else "Pricing refresh failed"
+        _write_refresh_status(
+            {
+                "status": status,
+                "message": message,
+                "started_at": start_time,
+                "finished_at": datetime.now(timezone.utc).isoformat(),
+                "last_run": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                "return_code": result.returncode,
+                "stderr": result.stderr[-1000:] if result.stderr else "",
+                "in_progress": False,
+            }
+        )
+    except Exception as exc:
+        _write_refresh_status(
+            {
+                "status": "failed",
+                "message": f"Pricing refresh failed: {exc}",
+                "started_at": start_time,
+                "finished_at": datetime.now(timezone.utc).isoformat(),
+                "in_progress": False,
+            }
+        )
+    finally:
+        _refresh_in_progress = False
+
+
 @app.get("/api/offers")
 def get_offers() -> list[dict[str, str]]:
     return _build_offer_rows()
@@ -154,6 +233,38 @@ def set_pins(payload: dict[str, list[str]]) -> dict[str, list[str]]:
     PINNED_PATH.parent.mkdir(parents=True, exist_ok=True)
     PINNED_PATH.write_text(json.dumps({"competitor_ids": cleaned}, indent=2), encoding="utf-8")
     return {"competitor_ids": cleaned}
+
+
+@app.get("/api/refresh-status")
+def get_refresh_status() -> dict[str, Any]:
+    return _load_refresh_status()
+
+
+@app.post("/api/refresh-pricing")
+def refresh_pricing(payload: dict[str, Any]) -> dict[str, Any]:
+    global _refresh_in_progress
+    with _refresh_lock:
+        if _refresh_in_progress:
+            status = _load_refresh_status()
+            status["in_progress"] = True
+            return status
+        _refresh_in_progress = True
+        limit = payload.get("limit", 10)
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            limit = 10
+        _write_refresh_status(
+            {
+                "status": "running",
+                "message": "Pricing refresh running",
+                "started_at": datetime.now(timezone.utc).isoformat(),
+                "in_progress": True,
+            }
+        )
+        thread = threading.Thread(target=_run_pricing_refresh, args=(limit,), daemon=True)
+        thread.start()
+    return _load_refresh_status()
 
 
 @app.get("/api/own_studio")
