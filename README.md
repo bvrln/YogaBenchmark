@@ -93,3 +93,7 @@ Use the systemd service and Tailscale instructions here:
 - SSH over Tailscale: `ssh bram@100.113.160.98`
 - Web app: `http://100.113.160.98:8000/`
 - Service name: `yoga-benchmark`
+
+## GitHub
+- Repo: https://github.com/bvrln/YogaBenchmark.git
+- Branch: main
