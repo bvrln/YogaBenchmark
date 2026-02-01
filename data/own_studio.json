@@ -1,0 +1,64 @@
+{
+  "name": "Movements Yoga",
+  "locations": [
+    "Amsterdam Vondelpark",
+    "Amsterdam City",
+    "Amsterdam LABzuid",
+    "Haarlem"
+  ],
+  "proposition": [
+    "Boutique hot yoga + hot pilates studios",
+    "Heated rooms (30–40C), premium instructor experience",
+    "Teacher consultation before/after class",
+    "Special classes available (included for Unlimited)"
+  ],
+  "packages": [
+    {
+      "name": "Trial",
+      "price_eur": "10.00",
+      "notes": "1 class, new residents only"
+    },
+    {
+      "name": "Single class",
+      "price_eur": "25.00",
+      "notes": "1 hot yoga or hot pilates class"
+    },
+    {
+      "name": "10-class card (3 months)",
+      "price_eur": "175.00",
+      "notes": "EUR 17.50/class"
+    },
+    {
+      "name": "15-class card (6 months)",
+      "price_eur": "225.00",
+      "notes": "EUR 15.00/class"
+    },
+    {
+      "name": "20-class card (6 months)",
+      "price_eur": "250.00",
+      "notes": "Promo EUR 12.50/class"
+    },
+    {
+      "name": "Movements 5 Membership",
+      "price_eur": "59.00",
+      "notes": "5 classes per 28 days"
+    },
+    {
+      "name": "Movements Daily Membership",
+      "price_eur": "129.00",
+      "notes": "1 class per day"
+    },
+    {
+      "name": "Movements Unlimited Membership",
+      "price_eur": "199.00",
+      "notes": "Unlimited classes, special classes included"
+    },
+    {
+      "name": "Special class",
+      "price_eur": "35.00",
+      "notes": "Included with Unlimited"
+    }
+  ],
+  "source_url": "https://movementsyoga.com/pricing/",
+  "last_checked_date": "2026-01-17"
+}

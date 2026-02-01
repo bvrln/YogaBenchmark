@@ -1,0 +1,32 @@
+competitor_id,name,brand,website,address,postcode,city,latitude,longitude,distance_walk_min,distance_bike_min,tier,segment,proposition_notes,last_checked_date
+our-studio,Movement's Yoga,Movement's Yoga,https://movementsyoga.com/,Unknown,1073,Amsterdam,52.355,4.891,0,0,Our studio,studio,"Focus on vinyasa, hot, and yin",2026-01-17
+comp-001,Saints & Stars,Saints & Stars,https://saints-stars.com/,Unknown,1017,Amsterdam,52.364,4.881,,15,Tier 3,boutique,"High-energy classes + hot rooms",2026-01-17
+comp-002,SportCity,SportCity,https://sportcity.nl/,Unknown,1018,Amsterdam,52.370,4.899,,20,Tier 3,gym chain,"Gym membership with yoga classes",2026-01-17
+comp-003,YogaWorks De Pijp,,https://example.com/,Unknown,1073,Amsterdam,52.356,4.892,8,3,Tier 1,studio,"Local studio with vinyasa focus",2026-01-17
+comp-004,Hot Flow Studio,,https://example.com/,Unknown,1054,Amsterdam,52.369,4.871,18,8,Tier 2,hot yoga,"Heated vinyasa + power flow",2026-01-17
+comp-005,Urban Zen,,https://example.com/,Unknown,1017,Amsterdam,52.359,4.907,20,9,Tier 2,studio,"Calm studio with yin + meditation",2026-01-17
+comp-006,Studio Flow,,https://example.com/,Unknown,1072,Amsterdam,52.352,4.894,12,5,Tier 1,studio,"Boutique flow classes",2026-01-17
+comp-007,Yin House,,https://example.com/,Unknown,1018,Amsterdam,52.373,4.906,22,10,Tier 2,yin,"Yin + restorative",2026-01-17
+comp-008,Balance Loft,,https://example.com/,Unknown,1053,Amsterdam,52.344,4.889,19,9,Tier 2,studio,"Lifestyle studio, yoga + breathwork",2026-01-17
+comp-009,Flow & Fire,,https://example.com/,Unknown,1071,Amsterdam,52.361,4.885,10,4,Tier 1,hot yoga,"Hot power + sculpt",2026-01-17
+comp-010,Lotus Dock,,https://example.com/,Unknown,1013,Amsterdam,52.380,4.873,,18,Tier 3,studio,"Docklands yoga studio",2026-01-17
+comp-011,Pilates Loft,,https://example.com/,Unknown,1091,Amsterdam,52.368,4.917,21,9,Tier 2,pilates,"Pilates + mat fusion",2026-01-17
+comp-012,Barre Bridge,,https://example.com/,Unknown,1075,Amsterdam,52.349,4.902,23,11,Tier 2,barre,"Barre and yoga blends",2026-01-17
+comp-013,Vinyasa Room,,https://example.com/,Unknown,1071,Amsterdam,52.357,4.882,9,4,Tier 1,vinyasa,"Vinyasa community studio",2026-01-17
+comp-014,Ashtanga Deck,,https://example.com/,Unknown,1092,Amsterdam,52.365,4.911,20,8,Tier 2,ashtanga,"Mysore + led primary",2026-01-17
+comp-015,Yin & Tonic,,https://example.com/,Unknown,1058,Amsterdam,52.341,4.899,24,11,Tier 2,yin,"Evening yin and sound",2026-01-17
+comp-016,Wave Studio,,https://example.com/,Unknown,1057,Amsterdam,52.353,4.865,16,7,Tier 2,studio,"Flow + mobility",2026-01-17
+comp-017,Core Garden,,https://example.com/,Unknown,1056,Amsterdam,52.361,4.857,22,10,Tier 2,studio,"Core + sculpt classes",2026-01-17
+comp-018,Harbor Yoga,,https://example.com/,Unknown,1014,Amsterdam,52.383,4.894,,19,Tier 3,studio,"Waterfront views",2026-01-17
+comp-019,Sundown Studio,,https://example.com/,Unknown,1061,Amsterdam,52.329,4.872,,20,Tier 3,studio,"Evening flow + slow",2026-01-17
+comp-020,Glow Lab,,https://example.com/,Unknown,1011,Amsterdam,52.373,4.893,21,9,Tier 2,studio,"Infrared + hot yoga",2026-01-17
+comp-021,Canal Flow,,https://example.com/,Unknown,1015,Amsterdam,52.376,4.886,19,8,Tier 2,studio,"Canal-side flow studio",2026-01-17
+comp-022,North Dock Yoga,,https://example.com/,Unknown,1031,Amsterdam,52.391,4.914,,18,Tier 3,studio,"North waterfront studio",2026-01-17
+comp-023,Heat House,,https://example.com/,Unknown,1057,Amsterdam,52.352,4.869,17,7,Tier 2,hot yoga,"Infrared hot classes",2026-01-17
+comp-024,Still Studio,,https://example.com/,Unknown,1052,Amsterdam,52.364,4.861,20,9,Tier 2,yin,"Restorative + yin focus",2026-01-17
+comp-025,Core Pilates,,https://example.com/,Unknown,1054,Amsterdam,52.366,4.876,18,8,Tier 2,pilates,"Pilates reformer + mat",2026-01-17
+comp-026,Barre Loft,,https://example.com/,Unknown,1071,Amsterdam,52.358,4.883,12,5,Tier 1,barre,"Barre + sculpt",2026-01-17
+comp-027,Morning Flow,,https://example.com/,Unknown,1074,Amsterdam,52.351,4.903,15,6,Tier 2,studio,"Early morning classes",2026-01-17
+comp-028,Sunrise Yoga,,https://example.com/,Unknown,1062,Amsterdam,52.342,4.861,,18,Tier 3,studio,"Bright flow + breathwork",2026-01-17
+comp-029,City Zen,,https://example.com/,Unknown,1012,Amsterdam,52.375,4.898,22,10,Tier 2,studio,"Zen and mindfulness",2026-01-17
+comp-030,East Flow,,https://example.com/,Unknown,1093,Amsterdam,52.362,4.924,,18,Tier 3,studio,"East side community yoga",2026-01-17

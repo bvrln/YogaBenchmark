@@ -1,0 +1,10 @@
+[Unit]
+Description=Yoga Benchmark Weekly Refresh
+After=network.target
+
+[Service]
+Type=oneshot
+User=bram
+WorkingDirectory=/home/bram/yoga-price-benchmark
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/bram/yoga-price-benchmark/.venv/bin/python /home/bram/yoga-price-benchmark/analysis/weekly_refresh.py

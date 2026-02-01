@@ -1,0 +1,203 @@
+:root {
+  --bg: #f4f2ec;
+  --panel: #fffdf7;
+  --accent: #2c4f7b;
+  --border: #a39c8f;
+  --text: #1c1c1c;
+  --muted: #5f5a50;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Verdana", "Tahoma", sans-serif;
+  background: #ddd9ce;
+  color: var(--text);
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 3px solid var(--border);
+  box-shadow: 6px 6px 0 #b5b0a5;
+  min-height: 100vh;
+}
+
+.masthead {
+  background: linear-gradient(90deg, #365c8d, #7aa1c6);
+  color: #f8f6f0;
+  padding: 16px 24px;
+  border-bottom: 3px solid var(--border);
+}
+
+.masthead h1 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 8px 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  padding: 16px;
+}
+
+.map-panel {
+  background: #e7e1d2;
+  border: 2px inset var(--border);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.map-frame {
+  width: 100%;
+  height: 540px;
+  border: 2px solid #6e6a61;
+  background: #c9c4b7;
+}
+
+#map {
+  background: #bdb5a8;
+}
+
+.map-caption {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 12px;
+  box-shadow: 3px 3px 0 #c9c2b1;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 8px 0;
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px 0;
+}
+
+.pricing {
+  list-style: square;
+  padding-left: 18px;
+  margin: 10px 0 0 0;
+}
+
+.offers {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.offers th,
+.offers td {
+  border: 1px solid var(--border);
+  padding: 6px;
+  text-align: left;
+}
+
+.pin-button {
+  background: #f7f1e2;
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.pin-button.pinned {
+  background: #e7f2d9;
+  border-color: #6b8a4f;
+}
+
+.pin-cell {
+  width: 50px;
+  text-align: center;
+}
+
+.pinned-row {
+  background: #f0f5e6;
+}
+
+.offers th {
+  background: #d9d2c3;
+}
+
+.benchmark-card,
+.detail-card {
+  margin-top: 6px;
+}
+
+.detail-box {
+  background: #f2ecdd;
+  border: 1px dashed #9b9487;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background: #efe6d2;
+}
+
+.selected-row {
+  background: #e0ead4;
+  font-weight: bold;
+}
+
+
+.footer {
+  padding: 10px 16px 18px;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 2px solid var(--border);
+  background: #eee9dd;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-frame {
+    height: 360px;
+  }
+}

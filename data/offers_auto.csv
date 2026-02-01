@@ -1,0 +1,68 @@
+offer_id,competitor_id,offer_type,offer_name,class_type,heat,class_length_min,sessions_included,duration_days,price_eur,currency,auto_renew,contract_months,booking_limit,intro_restrictions,source_url,last_checked_date
+auto-0001,comp-091,membership,who want to be able to come 15 times a month,,,,,,8,EUR,,,,,https://anima-house.com/pricing/,2026-01-18
+auto-0002,comp-010,intro,y & Pilates Classes in Amsterdam Intro offer: 2 classes for EUR 20 Book a class ➜ Schedule Pricing Find a class pack tha,pilates,,,2,,20,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0003,comp-010,intro,Intro offer 2 for EUR 20 valid for 2 weeks Book a class ➜ 1 class EUR 19 valid for 1 we,,,,1,14,20,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0004,comp-010,unknown,ro offer 2 for EUR 20 valid for 2 weeks Book a class ➜ 1 class EUR 19 valid for 1 week Book a class ➜ 3 classes EUR 50 E,,,,1,14,19,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0005,comp-010,membership,ass ➜ 1 class EUR 19 valid for 1 week Book a class ➜ 3 classes EUR 50 EUR 17 per class valid for 1 month Book a class ➜ ,,,,1,30,50,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0006,comp-010,membership,➜ 1 class EUR 19 valid for 1 week Book a class ➜ 3 classes EUR 50 EUR 17 per class valid for 1 month Book a class ➜ 5 cl,,,,1,30,17,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0007,comp-010,membership,50 EUR 17 per class valid for 1 month Book a class ➜ 5 classes EUR 80 EUR 16 per class valid for 2 months Book a class ➜,,,,5,30,80,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0008,comp-010,membership,17 per class valid for 1 month Book a class ➜ 5 classes EUR 80 EUR 16 per class valid for 2 months Book a class ➜ 10 cla,,,,5,30,16,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0009,comp-010,membership,EUR 16 per class valid for 2 months Book a class ➜ 10 classes EUR 150 EUR 15 per class valid for 4 month Book a class ➜ ,,,,10,,150,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0010,comp-010,membership,per class valid for 2 months Book a class ➜ 10 classes EUR 150 EUR 15 per class valid for 4 month Book a class ➜ Our cla,,,,10,,15,EUR,,,,,https://revive-studio.nl/,2026-01-18
+auto-0011,comp-096,intro,"3 Intake Privé Trainingen - EUR 150,- Reserveer nu",,,,,,150.,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0012,comp-096,intro,"gen - EUR 150,- Reserveer nu",,,,,,20.,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0013,comp-096,intro,"GYROTONIC® Privé - Proefpakket van 3 lessen EUR 150,00 GYROTONIC® Privé - Enkele les EUR 70,00 GYROTONIC® Privé - 10",,,,3,,150.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0014,comp-096,pack,"efpakket van 3 lessen EUR 150,00 GYROTONIC® Privé - Enkele les EUR 70,00 GYROTONIC® Privé - 10 lessenkaart EUR 595,00 (t",,,,3,,70.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0015,comp-096,membership,"Privé - Enkele les EUR 70,00 GYROTONIC® Privé - 10 lessenkaart EUR 595,00 (te gebruiken binnen 3 maanden) GYROTONIC® Pri",,,,10,30,595.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0016,comp-096,membership,"bruiken binnen 3 maanden) GYROTONIC® Privé - 12 lessenkaart EUR 645,00 (te gebruiken binnen 2 maanden) Duo en Trio train",,,,12,30,645.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0017,comp-096,pack,"GYROTONIC® Duo - Enkele les EUR 85,00 GYROTONIC® Duo - 5 lessenkaart EUR 375,00 (te gebruiken binnen",,,,5,,85.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0018,comp-096,membership,"NIC® Duo - Enkele les EUR 85,00 GYROTONIC® Duo - 5 lessenkaart EUR 375,00 (te gebruiken binnen 2 maanden) GYROTONIC® Tri",,,,5,30,375.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0019,comp-096,membership,"te gebruiken binnen 2 maanden) GYROTONIC® Trio - Enkele les EUR 100,00 GYROTONIC® Trio - 5 lessenkaart EUR 450,00 (te ge",,,,5,30,100.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0020,comp-096,membership,"® Trio - Enkele les EUR 100,00 GYROTONIC® Trio - 5 lessenkaart EUR 450,00 (te gebruiken binnen 2 maanden) GYROTONIC® & G",,,,5,30,450.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0021,comp-096,intro,"n 2 maanden) GYROTONIC® & GYROKINESIS® Groepsles - Proefles EUR 20,00 GYROTONIC®/GYROKINESIS® Groepsles - Enkele les EUR",,,,,30,20.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0022,comp-096,pack,"efles EUR 20,00 GYROTONIC®/GYROKINESIS® Groepsles - Enkele les EUR 30,00 GYROTONIC®/GYROKINESIS® Groepsles– 10 lessenkaa",,,,10,,30.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0023,comp-096,membership,"es EUR 30,00 GYROTONIC®/GYROKINESIS® Groepsles– 10 lessenkaart EUR 250,00 (te gebruiken binnen 3 maanden)",,,,10,30,250.00,EUR,,,,,https://www.casamotion.nl/prices/,2026-01-18
+auto-0024,comp-152,pack,Huur al vanaf EUR 50 per uur,,,,,,50,EUR,,,,,https://www.casamomo.nl/,2026-01-18
+auto-0025,comp-152,unknown,In de avonduren huur je de studio al vanaf EUR 75 per avond,,,,,,75,EUR,,,,,https://www.casamomo.nl/,2026-01-18
+auto-0026,comp-152,unknown,S PLATTEGROND ALGEMENE VOORWAARDEN CONTACT OVER ONS CONTACT EUR  700 ​ ​ 5 x 2 uur (tijdslot van 2u) Normale prijs: EUR ,,,,,,700,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0027,comp-152,unknown,ONTACT EUR  700 ​ ​ 5 x 2 uur (tijdslot van 2u) Normale prijs: EUR 1250 SELECTEREN EUR  1,,,,,,1250,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0028,comp-152,unknown,5 x 2 uur (tijdslot van 2u) Normale prijs: EUR 1250 SELECTEREN EUR  1,,,,,,1.000,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0029,comp-152,unknown,EREN EUR  1,,,,,,1750,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0030,comp-152,unknown,7 x 2 uur (tijdslot van 2u) Normale prijs: EUR 1750 SELECTEREN EUR  1,,,,,,1.250,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0031,comp-152,unknown,REN EUR  1,,,,,,2500,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0032,comp-152,unknown,0 x 2 uur (tijdslot van 2u) Normale prijs: EUR 2500 SELECTEREN EUR  3,,,,,,3.000,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0033,comp-152,pack,REN EUR  3,,,,,,7500,EUR,,,,,https://www.casamomo.nl/strippenkaart,2026-01-18
+auto-0034,comp-152,membership,OVER ONS CONTACT TIJDSLOTEN Dienstgegevens 1 HOUR 150 euro EUR  150 BOEKEN Abonnementen bekijken 2 HOURS 225 euro EUR  2,,,,,,150,EUR,,,,,https://www.casamomo.nl/tarieven,2026-01-18
+auto-0035,comp-152,membership,50 euro EUR  150 BOEKEN Abonnementen bekijken 2 HOURS 225 euro EUR  225 BOEKEN Abonnementen bekijken 4 HOURS 400 euro EU,,,,,,225,EUR,,,,,https://www.casamomo.nl/tarieven,2026-01-18
+auto-0036,comp-152,membership,25 euro EUR  225 BOEKEN Abonnementen bekijken 4 HOURS 400 euro EUR  400 BOEKEN Abonnementen bekijken 8 HOURS Meest popul,,,,,,400,EUR,,,,,https://www.casamomo.nl/tarieven,2026-01-18
+auto-0037,comp-152,membership,EKEN Abonnementen bekijken 8 HOURS Meest populair,,,,,,675,EUR,,,,,https://www.casamomo.nl/tarieven,2026-01-18
+auto-0038,comp-152,membership,5 euro EUR  675 BOEKEN Abonnementen bekijken 12 HOURS 900 euro EUR  900 BOEKEN Abonnementen bekijken REDACTIONELE SHOOT ,,,,,,900,EUR,,,,,https://www.casamomo.nl/tarieven,2026-01-18
+auto-0039,comp-152,unknown,- Tafelsetting tot 20 personen,,,,,,25,EUR,,,,,https://www.casamomo.nl/masterclasses,2026-01-18
+auto-0040,comp-069,membership,nl Log in Start today UNLOCK UNLIMITED WORKOUTS 6 WEEKS FOR EUR 1 GET THE DEAL BECOME A MEMBER At Saints & Stars you def,,,,,42,1,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0041,comp-069,unknown,NG PRIORITY Book your workouts 3 weeks in advance,,,,,365,1,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0042,comp-069,membership,Unlock your 1-year membership & get up to EUR 627 discount,,,,,365,627,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0043,comp-069,pack,& get up to EUR 627 discount,,,,,42,1,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0044,comp-069,pack,Stainless Bottle • Premium: 12 extra guest passes ​(worth: EUR 240) (valid until March 15) • Gold: 6 guest passes ​(wort,,,,,,240,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0045,comp-069,membership,240) (valid until March 1) • Extra Coaching Session (worth: EUR 89) No sign-up fee this month,,,,,42,89,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0046,comp-069,membership,"After your initial 6 weeks for EUR 1, there will be 13 subsequent payments of EUR 139 for Gold (or EUR",,,,,42,1.,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0047,comp-069,membership,"ial 6 weeks for EUR 1, there will be 13 subsequent payments of EUR 139 for Gold (or EUR 199 for Premium)",,,,,42,139,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0048,comp-069,membership,", there will be 13 subsequent payments of EUR 139 for Gold (or EUR 199 for Premium)",,,,,,199,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0049,comp-069,unknown,"ts In-club discount Priority booking Coaching Session worth EUR 89 (one-off) FIRST 6 WEEKS FOR EUR 1 Gold EUR 139 EUR 1,",,,,,42,89,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0050,comp-069,unknown,"king Coaching Session worth EUR 89 (one-off) FIRST 6 WEEKS FOR EUR 1 Gold EUR 139 EUR 1,- every 4 weeks 15% 2 weeks 1 FI",,,,,42,1,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0051,comp-069,unknown,"ching Session worth EUR 89 (one-off) FIRST 6 WEEKS FOR EUR 1 Gold EUR 139 EUR 1,- every 4 weeks 15% 2 weeks 1 FIRST 6 WE",,,,,42,139,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0052,comp-069,unknown,"Session worth EUR 89 (one-off) FIRST 6 WEEKS FOR EUR 1 Gold EUR 139 EUR 1,- every 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FO",,,,,42,1.,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0053,comp-069,unknown,"old EUR 139 EUR 1,- every 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FOR EUR 1 Premium EUR 199 EUR 1,- every 4 weeks 25% 3 week",,,,,28,1,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0054,comp-069,unknown,",- every 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FOR EUR 1 Premium EUR 199 EUR 1,- every 4 weeks 25% 3 weeks 2 show more ben",,,,,28,199,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0055,comp-069,unknown,"ery 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FOR EUR 1 Premium EUR 199 EUR 1,- every 4 weeks 25% 3 weeks 2 show more benefits",,,,,28,1.,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0056,comp-069,membership,an cancel anytime with a 4-week cancellation period,,,,,,30,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0057,comp-069,unknown,EP 3/3 This is it,,,,,365,139,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0058,comp-069,unknown,"member now, and get your first 6 weeks for only EUR 1 (worth: EUR 208,50)",,,,,42,208.50,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0059,comp-069,pack,"EUR 208,50)",,,,,,89,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0060,comp-069,pack,"Session (worth: EUR 89), 6 complimentary guest passes (worth: EUR 120), a tote bag and an exclusive blue water bottle",,,,,,120,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0061,comp-069,unknown,"Join now to get a total discount of EUR 417,50",,,,,42,417.50,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0062,comp-069,unknown,"member now, and get your first 6 weeks for only EUR 1 (worth: EUR 298,50)",,,,,42,298.50,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0063,comp-069,unknown,"Join now to get a total discount of EUR 627,50",,,,,42,627.50,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0064,comp-069,unknown,"ial 6 weeks for EUR 1, there will be 13 subsequent payments of EUR 199 for Gold",,,,,42,199,EUR,,,,,https://www.saints-stars.com/en/memberships,2026-01-18
+auto-0065,comp-069,unknown,ts In-club discount Priority booking Coaching Session worth EUR 89 (one-off) Saints & Stars bottle (one-off) Exclusive H,,,,,,89,EUR,,,,,https://www.saints-stars.com/en/pricing,2026-01-18
+auto-0066,comp-069,membership,",- every 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FOR EUR 1 Premium EUR 199 EUR 1,- every 4 weeks 25% 3 weeks 2 STEP 2/3 memb",,,,,28,199,EUR,,,,,https://www.saints-stars.com/en/pricing,2026-01-18
+auto-0067,comp-069,membership,"ery 4 weeks 15% 2 weeks 1 FIRST 6 WEEKS FOR EUR 1 Premium EUR 199 EUR 1,- every 4 weeks 25% 3 weeks 2 STEP 2/3 membershi",,,,,28,1.,EUR,,,,,https://www.saints-stars.com/en/pricing,2026-01-18
