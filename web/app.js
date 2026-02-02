@@ -1431,7 +1431,7 @@ function updateCompetitorDetailPinButton(row) {
   button.onclick = () => togglePin(row);
 }
 
-fetch("/api/own_studio")
+fetch("/api/own-studio")
   .then((response) => (response.ok ? response.json() : Promise.reject()))
   .then((data) => {
     if (!data || !data.name) {

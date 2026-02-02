@@ -1,0 +1,80 @@
+/* Tab Navigation */
+.tabs {
+    display: flex;
+    background: #e8e6df;
+    border-bottom: 3px solid var(--border);
+    padding: 0;
+    margin: 0;
+    gap: 0;
+}
+
+.tab {
+    flex: 1;
+    padding: 16px 24px;
+    background: #d4d1c8;
+    border: none;
+    border-right: 2px solid var(--border);
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.tab:last-child {
+    border-right: none;
+}
+
+.tab:hover {
+    background: #c9c6bd;
+}
+
+.tab.active {
+    background: var(--bg);
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Tab Content */
+.tab-content {
+    padding: 0;
+}
+
+.tab-panel {
+    display: none;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Overview Tab Layout */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+/* Pricing Tab Layout */
+.pricing-layout {
+    display: grid;
+    gap: 20px;
+}
