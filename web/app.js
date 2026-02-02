@@ -115,6 +115,222 @@ const ownLocations = [
 let pinnedCompetitors = new Set();
 window._selectedCompetitorName = "";
 window._ownStudioOffers = [];
+window._filterState = {
+  searchQuery: "",
+  tierFilter: "all",
+  segmentFilter: [],
+  distanceMax: 30,
+  showComparableOnly: false,
+};
+
+// ============================================================================
+// COMPARABILITY SCORING
+// ============================================================================
+
+/**
+ * Calculate comparability score between two offers (0-100)
+ * Higher score = more comparable offerings
+ */
+function calculateComparability(offer1, offer2) {
+  if (!offer1 || !offer2) return 0;
+
+  let score = 0;
+  const offerType1 = (offer1.offer_type || "").toLowerCase();
+  const offerType2 = (offer2.offer_type || "").toLowerCase();
+  const isMembership1 = offerType1 === "membership" || offerType1 === "subscription";
+  const isMembership2 = offerType2 === "membership" || offerType2 === "subscription";
+
+  // For memberships, use different scoring weights
+  if (isMembership1 && isMembership2) {
+    score += scoreClassType(offer1.class_type, offer2.class_type, 25);
+    score += scoreHeatLevel(offer1.heat, offer2.heat, 20);
+    score += scoreClassLength(offer1.class_length_min, offer2.class_length_min, 15);
+    score += scoreUsageRestrictions(offer1, offer2, 25);
+    score += scoreContractTerms(offer1, offer2, 15);
+  } else {
+    // For drop-ins and packs
+    score += scoreClassType(offer1.class_type, offer2.class_type, 35);
+    score += scoreHeatLevel(offer1.heat, offer2.heat, 25);
+    score += scoreClassLength(offer1.class_length_min, offer2.class_length_min, 20);
+    score += scoreOfferType(offer1.offer_type, offer2.offer_type, 20);
+  }
+
+  return Math.round(score);
+}
+
+function scoreClassType(type1, type2, maxPoints) {
+  const t1 = (type1 || "").toLowerCase().trim();
+  const t2 = (type2 || "").toLowerCase().trim();
+
+  if (!t1 || !t2) return 0;
+  if (t1 === t2) return maxPoints;
+
+  // Similar class types
+  const similar = [
+    ["yoga", "vinyasa", "vinyasa_flow", "hatha", "power_yoga"],
+    ["hot_yoga", "heated_yoga", "bikram", "bikram_26_2"],
+    ["pilates", "reformer", "reformer_pilates", "mat_pilates"],
+    ["yin", "yin_restorative", "restorative"],
+  ];
+
+  for (const group of similar) {
+    if (group.includes(t1) && group.includes(t2)) {
+      return Math.round(maxPoints * 0.7);
+    }
+  }
+
+  return 0;
+}
+
+function scoreHeatLevel(heat1, heat2, maxPoints) {
+  const h1 = (heat1 || "none").toLowerCase().trim();
+  const h2 = (heat2 || "none").toLowerCase().trim();
+
+  if (h1 === h2) return maxPoints;
+
+  // Close heat levels
+  const closeMatches = [
+    ["hot", "warm"],
+    ["warm", "heated"],
+  ];
+
+  for (const pair of closeMatches) {
+    if ((pair[0] === h1 && pair[1] === h2) || (pair[1] === h1 && pair[0] === h2)) {
+      return Math.round(maxPoints * 0.5);
+    }
+  }
+
+  return 0;
+}
+
+function scoreClassLength(len1, len2, maxPoints) {
+  const l1 = Number(len1);
+  const l2 = Number(len2);
+
+  if (!Number.isFinite(l1) || !Number.isFinite(l2)) return 0;
+  if (l1 === l2) return maxPoints;
+
+  const diff = Math.abs(l1 - l2);
+  if (diff <= 15) return Math.round(maxPoints * 0.5);
+
+  return 0;
+}
+
+function scoreOfferType(type1, type2, maxPoints) {
+  const t1 = (type1 || "").toLowerCase().trim();
+  const t2 = (type2 || "").toLowerCase().trim();
+
+  if (!t1 || !t2) return 0;
+  if (t1 === t2) return maxPoints;
+
+  // Similar offer structures
+  if ((t1 === "pack" || t1 === "bundle") && (t2 === "pack" || t2 === "bundle")) {
+    return Math.round(maxPoints * 0.5);
+  }
+
+  return 0;
+}
+
+function scoreUsageRestrictions(offer1, offer2, maxPoints) {
+  // Use new automated fields if available
+  const usageType1 = (offer1.usage_limit_type || "").toLowerCase();
+  const usageType2 = (offer2.usage_limit_type || "").toLowerCase();
+
+  // If we have the new fields, use them
+  if (usageType1 && usageType2) {
+    // Both unlimited
+    if (usageType1 === "unlimited" && usageType2 === "unlimited") {
+      return maxPoints;
+    }
+
+    // Both have same restriction type
+    if (usageType1 === usageType2) {
+      const value1 = Number(offer1.usage_limit_value || 0);
+      const value2 = Number(offer2.usage_limit_value || 0);
+
+      // Exact match
+      if (value1 === value2) return maxPoints;
+
+      // Close match (within 1 class difference)
+      if (Math.abs(value1 - value2) <= 1) return Math.round(maxPoints * 0.8);
+
+      // Same type but different values (e.g., 2x/week vs 3x/week)
+      return Math.round(maxPoints * 0.4);
+    }
+
+    // One unlimited, one limited
+    return Math.round(maxPoints * 0.2);
+  }
+
+  // Fallback to old logic if new fields not available
+  const sessions1 = offer1.sessions_included || "";
+  const sessions2 = offer2.sessions_included || "";
+  const unlimited1 = sessions1.toLowerCase().includes("unlimited") || sessions1 === "";
+  const unlimited2 = sessions2.toLowerCase().includes("unlimited") || sessions2 === "";
+
+  if (unlimited1 && unlimited2) return maxPoints;
+  if (!unlimited1 && !unlimited2) return Math.round(maxPoints * 0.6);
+  return Math.round(maxPoints * 0.2);
+}
+
+function scoreContractTerms(offer1, offer2, maxPoints) {
+  // Use new automated fields if available
+  const contractType1 = (offer1.contract_type || "").toLowerCase();
+  const contractType2 = (offer2.contract_type || "").toLowerCase();
+
+  if (contractType1 && contractType2) {
+    // Exact match
+    if (contractType1 === contractType2) return maxPoints;
+
+    // Similar contracts (month-to-month vs quarterly)
+    const flexible = ["month_to_month", "quarterly"];
+    const committed = ["semi_annual", "annual"];
+
+    if (flexible.includes(contractType1) && flexible.includes(contractType2)) {
+      return Math.round(maxPoints * 0.7);
+    }
+
+    if (committed.includes(contractType1) && committed.includes(contractType2)) {
+      return Math.round(maxPoints * 0.7);
+    }
+
+    // Different commitment levels
+    return Math.round(maxPoints * 0.3);
+  }
+
+  // Fallback to old logic if new fields not available
+  const dur1 = Number(offer1.duration_days || 30);
+  const dur2 = Number(offer2.duration_days || 30);
+
+  if (!Number.isFinite(dur1) || !Number.isFinite(dur2)) return Math.round(maxPoints * 0.5);
+  if (dur1 === dur2) return maxPoints;
+  if (Math.abs(dur1 - dur2) <= 7) return Math.round(maxPoints * 0.5);
+  return 0;
+}
+
+/**
+ * Get comparability level and color
+ */
+function getComparabilityLevel(score) {
+  if (score >= 85) return { level: "high", color: "#2e7d32", icon: "🟢", label: "Highly comparable" };
+  if (score >= 60) return { level: "medium", color: "#f57c00", icon: "🟡", label: "Moderately comparable" };
+  return { level: "low", color: "#c62828", icon: "🔴", label: "Not comparable" };
+}
+
+/**
+ * Get comparability breakdown for tooltip
+ */
+function getComparabilityBreakdown(offer1, offer2) {
+  const classMatch = scoreClassType(offer1.class_type, offer2.class_type, 100) >= 50;
+  const heatMatch = scoreHeatLevel(offer1.heat, offer2.heat, 100) >= 50;
+  const lengthMatch = scoreClassLength(offer1.class_length_min, offer2.class_length_min, 100) >= 50;
+
+  return `Class type: ${classMatch ? "✓" : "✗"} | Heat: ${heatMatch ? "✓" : "✗"} | Duration: ${lengthMatch ? "✓" : "✗"}`;
+}
+
+// ============================================================================
+// EXISTING FUNCTIONS
+// ============================================================================
 
 function isOurStudio(row) {
   const name = (row.name || "").toLowerCase();
@@ -276,7 +492,7 @@ function buildMap(rows) {
         .addTo(map)
         .bindPopup(
           `<strong>${row.name || row.brand || "Studio"}</strong><br>${row.tier || ""}` +
-            `<br><button class="pin-button popup-pin">Pin</button>`
+          `<br><button class="pin-button popup-pin">Pin</button>`
         );
       bounds.extend(marker.getLatLng());
       marker.on("click", () => showCompetitorDetail(row));
@@ -378,6 +594,359 @@ function renderBenchmark(offers) {
   });
 }
 
+// ============================================================================
+// FILTERING AND INSIGHTS
+// ============================================================================
+
+function applyFilters(competitors, offers) {
+  const { searchQuery, tierFilter, segmentFilter, showComparableOnly } = window._filterState;
+
+  let filteredCompetitors = competitors.filter((comp) => !isOurStudio(comp));
+
+  // Search filter
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase();
+    filteredCompetitors = filteredCompetitors.filter((comp) => {
+      const name = (comp.name || "").toLowerCase();
+      const address = (comp.address || "").toLowerCase();
+      const city = (comp.city || "").toLowerCase();
+      return name.includes(query) || address.includes(query) || city.includes(query);
+    });
+  }
+
+  // Tier filter
+  if (tierFilter !== "all") {
+    filteredCompetitors = filteredCompetitors.filter((comp) => comp.tier === tierFilter);
+  }
+
+  // Segment filter
+  if (segmentFilter.length > 0 && !segmentFilter.includes("all")) {
+    filteredCompetitors = filteredCompetitors.filter((comp) => {
+      const segment = (comp.segment || "").toLowerCase();
+      return segmentFilter.some((s) => segment.includes(s.toLowerCase()));
+    });
+  }
+
+  updateFilterStatus(filteredCompetitors.length, competitors.length);
+  return filteredCompetitors;
+}
+
+function updateFilterStatus(filtered, total) {
+  const statusEl = document.getElementById("filter-status");
+  if (!statusEl) return;
+
+  const activeFilters = [];
+  if (window._filterState.searchQuery) activeFilters.push("search");
+  if (window._filterState.tierFilter !== "all") activeFilters.push("tier");
+  if (window._filterState.segmentFilter.length > 0) activeFilters.push("segment");
+
+  if (activeFilters.length === 0) {
+    statusEl.textContent = `Showing all ${total} competitors`;
+  } else {
+    statusEl.textContent = `Showing ${filtered} of ${total} competitors (${activeFilters.length} filter${activeFilters.length > 1 ? "s" : ""} active)`;
+  }
+}
+
+function generatePricingInsights(offers) {
+  const insightsContainer = document.getElementById("insights-container");
+  if (!insightsContainer) return;
+
+  const ownOffers = offers.filter((o) => isOurStudio({ name: o.studio }));
+  if (ownOffers.length === 0) {
+    insightsContainer.innerHTML = '<p class="note">No Movement\'s Yoga offers found</p>';
+    return;
+  }
+
+  const insights = [];
+
+  ownOffers.forEach((ownOffer) => {
+    const comparableOffers = offers.filter((o) => {
+      if (isOurStudio({ name: o.studio })) return false;
+      const score = calculateComparability(ownOffer, o);
+      return score >= 85;
+    });
+
+    if (comparableOffers.length === 0) {
+      insights.push({
+        type: "warning",
+        text: `⚠ ${ownOffer.offer || ownOffer.offer_type}: No comparable offers found - limited market data`
+      });
+      return;
+    }
+
+    const prices = comparableOffers
+      .map((o) => Number(o.price_per_class || o.price_eur))
+      .filter((p) => Number.isFinite(p))
+      .sort((a, b) => a - b);
+
+    if (prices.length === 0) return;
+
+    const mid = Math.floor(prices.length / 2);
+    const median = prices.length % 2 === 0 ? (prices[mid - 1] + prices[mid]) / 2 : prices[mid];
+    const ownPrice = Number(ownOffer.price_per_class || ownOffer.price_eur);
+
+    if (!Number.isFinite(ownPrice)) return;
+
+    const delta = ownPrice - median;
+    const percentDelta = ((delta / median) * 100).toFixed(1);
+
+    if (Math.abs(delta) < median * 0.05) {
+      // Within 5% - competitive
+      insights.push({
+        type: "recommendation",
+        text: `✓ ${ownOffer.offer || ownOffer.offer_type} (€${ownPrice.toFixed(2)}): Competitive vs ${comparableOffers.length} comparable offers (median €${median.toFixed(2)})`
+      });
+    } else if (delta > 0) {
+      // Above market
+      const suggestedPrice = median.toFixed(2);
+      insights.push({
+        type: "opportunity",
+        text: `💡 ${ownOffer.offer || ownOffer.offer_type} (€${ownPrice.toFixed(2)}): ${percentDelta}% above market median (€${median.toFixed(2)}) - consider €${suggestedPrice}`
+      });
+    } else {
+      // Below market
+      insights.push({
+        type: "opportunity",
+        text: `📈 ${ownOffer.offer || ownOffer.offer_type} (€${ownPrice.toFixed(2)}): ${Math.abs(percentDelta)}% below market - opportunity to increase to €${median.toFixed(2)}`
+      });
+    }
+  });
+
+  if (insights.length === 0) {
+    insightsContainer.innerHTML = '<p class="note">Pin competitors to see pricing insights</p>';
+    return;
+  }
+
+  insightsContainer.innerHTML = insights
+    .map((insight) => `<div class="insight-item insight-${insight.type}">${insight.text}</div>`)
+    .join("");
+}
+
+function setupFilters() {
+  const searchInput = document.getElementById("search-input");
+  const tierFilter = document.getElementById("tier-filter");
+  const segmentFilter = document.getElementById("segment-filter");
+  const comparableOnly = document.getElementById("comparable-only");
+  const resetButton = document.getElementById("reset-filters");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      window._filterState.searchQuery = e.target.value;
+      refreshCompetitorList();
+    });
+  }
+
+  if (tierFilter) {
+    tierFilter.addEventListener("change", (e) => {
+      window._filterState.tierFilter = e.target.value;
+      refreshCompetitorList();
+    });
+  }
+
+  if (segmentFilter) {
+    segmentFilter.addEventListener("change", (e) => {
+      const value = e.target.value;
+      window._filterState.segmentFilter = value === "all" ? [] : [value];
+      refreshCompetitorList();
+    });
+  }
+
+  if (comparableOnly) {
+    comparableOnly.addEventListener("change", (e) => {
+      window._filterState.showComparableOnly = e.target.checked;
+      refreshCompetitorList();
+    });
+  }
+
+  if (resetButton) {
+    resetButton.addEventListener("click", () => {
+      window._filterState = {
+        searchQuery: "",
+        tierFilter: "all",
+        segmentFilter: [],
+        distanceMax: 30,
+        showComparableOnly: false,
+      };
+      if (searchInput) searchInput.value = "";
+      if (tierFilter) tierFilter.value = "all";
+      if (segmentFilter) segmentFilter.value = "all";
+      if (comparableOnly) comparableOnly.checked = false;
+      refreshCompetitorList();
+    });
+  }
+}
+
+function refreshCompetitorList() {
+  if (!window._competitors) return;
+  const filtered = applyFilters(window._competitors, window._offers || []);
+  renderCompetitorRows(filtered);
+}
+
+// ============================================================================
+// TOP COMPARABLE COMPETITORS RECOMMENDATION
+// ============================================================================
+
+/**
+ * Calculate overall similarity score for a competitor vs Movement's Yoga
+ * Returns average comparability across all offer combinations
+ */
+function calculateCompetitorSimilarity(competitor, ownOffers, allOffers) {
+  const competitorOffers = allOffers.filter((o) =>
+    o.competitor_id === competitor.competitor_id || o.studio === competitor.name
+  );
+
+  if (competitorOffers.length === 0) return 0;
+
+  let totalScore = 0;
+  let comparisons = 0;
+
+  // Compare each own offer with each competitor offer
+  ownOffers.forEach((ownOffer) => {
+    competitorOffers.forEach((compOffer) => {
+      const score = calculateComparability(ownOffer, compOffer);
+      totalScore += score;
+      comparisons++;
+    });
+  });
+
+  if (comparisons === 0) return 0;
+
+  const avgScore = totalScore / comparisons;
+
+  // Bonus points for matching characteristics
+  let bonusScore = 0;
+
+  // Segment match (hot yoga, boutique, etc.)
+  const segment = (competitor.segment || "").toLowerCase();
+  if (segment.includes("hot") || segment.includes("yoga") || segment.includes("boutique")) {
+    bonusScore += 10;
+  }
+
+  // Tier proximity (Tier 1 and 2 are more relevant)
+  if (competitor.tier === "Tier 1") {
+    bonusScore += 15;
+  } else if (competitor.tier === "Tier 2") {
+    bonusScore += 10;
+  }
+
+  // Distance proximity
+  const distance = getDistance(competitor);
+  if (distance < 15) {
+    bonusScore += 10;
+  } else if (distance < 25) {
+    bonusScore += 5;
+  }
+
+  return Math.min(100, avgScore + bonusScore);
+}
+
+/**
+ * Generate and display top comparable competitors
+ */
+function generateTopCompetitors(competitors, offers) {
+  const listEl = document.getElementById("top-competitors-list");
+  if (!listEl) return;
+
+  const ownOffers = offers.filter((o) => isOurStudio({ name: o.studio }));
+  if (ownOffers.length === 0) {
+    listEl.innerHTML = '<p class="note">No Movement\'s Yoga offers found</p>';
+    return;
+  }
+
+  // Calculate similarity for each competitor
+  const scored = competitors
+    .filter((comp) => !isOurStudio(comp))
+    .map((comp) => ({
+      competitor: comp,
+      score: calculateCompetitorSimilarity(comp, ownOffers, offers),
+    }))
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 10);
+
+  if (scored.length === 0) {
+    listEl.innerHTML = '<p class="note">No comparable competitors found</p>';
+    return;
+  }
+
+  // Store top competitors for pin button
+  window._topCompetitors = scored.slice(0, 5).map((item) => item.competitor);
+
+  // Render list
+  const html = scored.map((item, index) => {
+    const { competitor, score } = item;
+    const distance = competitor.distance_walk_min
+      ? `${competitor.distance_walk_min}m walk`
+      : competitor.distance_bike_min
+        ? `${competitor.distance_bike_min}m bike`
+        : "";
+
+    const isPinned = pinnedCompetitors.has(competitor.competitor_id);
+    const level = getComparabilityLevel(score);
+
+    return `
+      <div class="top-competitor-item ${index < 5 ? 'top-5' : ''}" data-competitor-id="${competitor.competitor_id}">
+        <div class="top-competitor-rank">${index + 1}</div>
+        <div class="top-competitor-info">
+          <div class="top-competitor-name">${competitor.name || competitor.brand || "Unknown"}</div>
+          <div class="top-competitor-meta">${competitor.tier || ""} • ${distance} • ${competitor.segment || ""}</div>
+        </div>
+        <div class="top-competitor-score">
+          <span class="comparability-badge comparability-${level.level}" title="${level.label}">
+            ${score.toFixed(0)}%
+          </span>
+          ${isPinned ? '<span class="pinned-indicator">📌</span>' : ''}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  listEl.innerHTML = html;
+
+  // Add click handlers
+  listEl.querySelectorAll(".top-competitor-item").forEach((el) => {
+    el.addEventListener("click", () => {
+      const competitorId = el.dataset.competitorId;
+      const competitor = competitors.find((c) => c.competitor_id === competitorId);
+      if (competitor) {
+        showCompetitorDetail(competitor);
+      }
+    });
+  });
+}
+
+/**
+ * Pin top 5 competitors
+ */
+function pinTopCompetitors() {
+  if (!window._topCompetitors || window._topCompetitors.length === 0) {
+    alert("No top competitors available to pin");
+    return;
+  }
+
+  window._topCompetitors.forEach((comp) => {
+    if (comp.competitor_id && !pinnedCompetitors.has(comp.competitor_id)) {
+      pinnedCompetitors.add(comp.competitor_id);
+    }
+  });
+
+  savePinnedCompetitors();
+
+  if (window._competitors) {
+    const filtered = applyFilters(window._competitors, window._offers || []);
+    renderCompetitorRows(filtered);
+  }
+
+  if (window._offers) {
+    generateTopCompetitors(window._competitors || [], window._offers);
+    generatePricingInsights(window._offers);
+  }
+
+  updatePinnedMarkers();
+  setRefreshStatus("Top competitors pinned - pricing refresh recommended");
+}
+
+
 function togglePin(row) {
   if (!row.competitor_id) {
     return;
@@ -409,7 +978,7 @@ function savePinnedCompetitors() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ competitor_ids: payload }),
-  }).catch(() => {});
+  }).catch(() => { });
 }
 
 
@@ -418,7 +987,7 @@ function loadPinnedCompetitors() {
   if (local) {
     try {
       pinnedCompetitors = new Set(JSON.parse(local));
-    } catch {}
+    } catch { }
   }
   return fetch("/api/pins")
     .then((response) => (response.ok ? response.json() : Promise.reject()))
@@ -428,7 +997,7 @@ function loadPinnedCompetitors() {
         localStorage.setItem("pinnedCompetitors", JSON.stringify(data.competitor_ids));
       }
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 
 
@@ -740,6 +1309,7 @@ fetch("/api/offers")
     renderOfferRows(rows);
     renderBenchmark(rows);
     renderCompetitorBenchmark(rows, null);
+    generatePricingInsights(rows);
     setStatus(`Status: JS loaded | Offers: ${rows.length}`);
   })
   .catch(() => {
@@ -747,6 +1317,7 @@ fetch("/api/offers")
     renderOfferRows(fallbackOffers);
     renderBenchmark(fallbackOffers);
     renderCompetitorBenchmark(fallbackOffers, null);
+    generatePricingInsights(fallbackOffers);
     setStatus("Status: JS loaded | Offers: fallback");
   });
 
@@ -754,7 +1325,8 @@ fetch("/api/competitors")
   .then((response) => (response.ok ? response.json() : Promise.reject()))
   .then((rows) => {
     window._competitors = rows;
-    renderCompetitorRows(rows);
+    const filtered = applyFilters(rows, window._offers || []);
+    renderCompetitorRows(filtered);
     if (typeof L === "undefined") {
       setStatus("Status: JS loaded | Map error: Leaflet not loaded");
     } else {
@@ -765,7 +1337,8 @@ fetch("/api/competitors")
   })
   .catch(() => {
     window._competitors = fallbackCompetitors;
-    renderCompetitorRows(fallbackCompetitors);
+    const filtered = applyFilters(fallbackCompetitors, window._offers || []);
+    renderCompetitorRows(filtered);
     if (typeof L === "undefined") {
       setStatus("Status: JS loaded | Map error: Leaflet not loaded");
     } else {
@@ -777,10 +1350,22 @@ fetch("/api/competitors")
 
 loadPinnedCompetitors().then(() => {
   if (window._competitors) {
-    renderCompetitorRows(window._competitors);
+    const filtered = applyFilters(window._competitors, window._offers || []);
+    renderCompetitorRows(filtered);
     updatePinnedMarkers();
   }
+  if (window._offers) {
+    generatePricingInsights(window._offers);
+    generateTopCompetitors(window._competitors || [], window._offers);
+  }
   loadRefreshStatus();
+  setupFilters();
+
+  // Wire up pin top competitors button
+  const pinTopBtn = document.getElementById("pin-top-competitors");
+  if (pinTopBtn) {
+    pinTopBtn.addEventListener("click", pinTopCompetitors);
+  }
 });
 
 let refreshPoll = null;
@@ -805,7 +1390,7 @@ function loadRefreshStatus() {
         refreshPoll = null;
       }
     })
-    .catch(() => {});
+    .catch(() => { });
 }
 
 if (refreshButton) {
@@ -906,7 +1491,7 @@ fetch("/api/own_studio")
       sourceEl.innerHTML = `Source: <a href="${data.source_url}" target="_blank" rel="noopener">Pricing page</a>`;
     }
   })
-  .catch(() => {});
+  .catch(() => { });
 
 window.addEventListener("error", (event) => {
   setStatus(`Error: ${event.message}`);

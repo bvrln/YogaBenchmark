@@ -479,6 +479,126 @@ def _infer_class_length(context: str) -> str:
     return ""
 
 
+def _infer_usage_restrictions(context: str) -> tuple[str, str, str]:
+    """
+    Extract usage restrictions for memberships.
+    Returns: (usage_limit_type, usage_limit_value, usage_limit_period)
+    """
+    lower = context.lower()
+    
+    # Check for unlimited first
+    if any(term in lower for term in ["unlimited", "onbeperkt", "no limit", "geen limiet"]):
+        return ("unlimited", "", "")
+    
+    # Check for classes per week
+    patterns_week = [
+        r"(\d+)\s*(?:x|times)?\s*(?:per|/)\s*week",
+        r"(\d+)\s*(?:classes?|lessen)\s*(?:per|/)\s*week",
+        r"(\d+)x\s*(?:per|/)\s*week",
+    ]
+    for pattern in patterns_week:
+        match = re.search(pattern, lower)
+        if match:
+            return ("classes_per_week", match.group(1), "week")
+    
+    # Check for classes per month
+    patterns_month = [
+        r"(\d+)\s*(?:x|times)?\s*(?:per|/)\s*(?:month|maand)",
+        r"(\d+)\s*(?:classes?|lessen)\s*(?:per|/)\s*(?:month|maand)",
+        r"(\d+)x\s*(?:per|/)\s*(?:month|maand)",
+    ]
+    for pattern in patterns_month:
+        match = re.search(pattern, lower)
+        if match:
+            return ("classes_per_month", match.group(1), "month")
+    
+    # Default: assume unlimited if it's a membership
+    if any(term in lower for term in ["membership", "abonnement"]):
+        return ("unlimited", "", "")
+    
+    return ("", "", "")
+
+
+def _infer_contract_terms(context: str) -> tuple[str, str, str]:
+    """
+    Extract contract terms.
+    Returns: (contract_type, minimum_commitment_months, cancellation_notice_days)
+    """
+    lower = context.lower()
+    
+    # Check for month-to-month / no commitment
+    if any(term in lower for term in [
+        "month-to-month", "month to month", "no commitment", "cancel anytime",
+        "geen binding", "opzegbaar", "maand-tot-maand"
+    ]):
+        # Check for cancellation notice period
+        notice_match = re.search(r"(\d+)\s*(?:days?|dagen)\s*(?:notice|opzegtermijn)", lower)
+        notice_days = notice_match.group(1) if notice_match else "30"
+        return ("month_to_month", "1", notice_days)
+    
+    # Check for annual commitment
+    if any(term in lower for term in [
+        "12 month", "12-month", "annual", "yearly", "jaar", "12 maanden"
+    ]):
+        return ("annual", "12", "0")
+    
+    # Check for 6-month commitment
+    if any(term in lower for term in ["6 month", "6-month", "half year", "6 maanden"]):
+        return ("semi_annual", "6", "0")
+    
+    # Check for 3-month commitment
+    if any(term in lower for term in ["3 month", "3-month", "quarterly", "3 maanden"]):
+        return ("quarterly", "3", "0")
+    
+    # Check for intro offers
+    if any(term in lower for term in ["intro", "trial", "proef"]):
+        return ("intro", "0", "0")
+    
+    # Default: assume month-to-month for memberships
+    if any(term in lower for term in ["membership", "abonnement"]):
+        return ("month_to_month", "1", "30")
+    
+    return ("", "", "")
+
+
+def _infer_class_style(class_type: str, context: str) -> tuple[str, str]:
+    """
+    Infer detailed class style and intensity level.
+    Returns: (class_style, intensity_level)
+    """
+    lower = context.lower()
+    
+    # Yoga styles
+    if class_type in ["yoga", "hot_yoga"]:
+        if any(term in lower for term in ["vinyasa", "flow"]):
+            if any(term in lower for term in ["power", "athletic", "strong"]):
+                return ("power_yoga", "high")
+            return ("vinyasa_flow", "moderate")
+        
+        if any(term in lower for term in ["power", "athletic"]):
+            return ("power_yoga", "high")
+        
+        if any(term in lower for term in ["yin", "restorative", "gentle", "slow"]):
+            return ("yin_restorative", "low")
+        
+        if any(term in lower for term in ["bikram", "26+2", "26 postures"]):
+            return ("bikram_26_2", "high")
+        
+        if any(term in lower for term in ["ashtanga"]):
+            return ("ashtanga", "moderate")
+        
+        if any(term in lower for term in ["hatha"]):
+            return ("hatha", "moderate")
+    
+    # Pilates styles
+    if class_type == "pilates":
+        if any(term in lower for term in ["reformer"]):
+            return ("reformer_pilates", "moderate")
+        return ("mat_pilates", "moderate")
+    
+    return ("", "")
+
+
 def _select_competitors(rows: list[dict[str, str]], limit: int) -> list[dict[str, str]]:
     pins = _load_pins()
     pinned = [row for row in rows if row.get("competitor_id") in pins]
@@ -600,6 +720,11 @@ def main() -> None:
                         continue
                     offer_keys.add(offer_key)
 
+                    # Extract enhanced fields
+                    usage_limit_type, usage_limit_value, usage_limit_period = _infer_usage_restrictions(context)
+                    contract_type, min_commitment_months, cancellation_notice_days = _infer_contract_terms(context)
+                    class_style, intensity_level = _infer_class_style(class_type, context)
+
                     offer_rows.append(
                         {
                             "offer_id": f"auto-{len(offer_rows)+1:04d}",
@@ -615,9 +740,16 @@ def main() -> None:
                             "price_unit": price_unit,
                             "currency": "EUR",
                             "auto_renew": "",
-                            "contract_months": "",
+                            "contract_months": min_commitment_months,
                             "booking_limit": "",
                             "intro_restrictions": "",
+                            "usage_limit_type": usage_limit_type,
+                            "usage_limit_value": usage_limit_value,
+                            "usage_limit_period": usage_limit_period,
+                            "contract_type": contract_type,
+                            "cancellation_notice_days": cancellation_notice_days,
+                            "class_style": class_style,
+                            "intensity_level": intensity_level,
                             "source_url": page_url,
                             "last_checked_date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                         }
@@ -672,6 +804,13 @@ def main() -> None:
                 "contract_months",
                 "booking_limit",
                 "intro_restrictions",
+                "usage_limit_type",
+                "usage_limit_value",
+                "usage_limit_period",
+                "contract_type",
+                "cancellation_notice_days",
+                "class_style",
+                "intensity_level",
                 "source_url",
                 "last_checked_date",
             ],
@@ -699,6 +838,13 @@ def main() -> None:
                 "contract_months",
                 "booking_limit",
                 "intro_restrictions",
+                "usage_limit_type",
+                "usage_limit_value",
+                "usage_limit_period",
+                "contract_type",
+                "cancellation_notice_days",
+                "class_style",
+                "intensity_level",
                 "source_url",
                 "last_checked_date",
             ],
