@@ -1,4 +1,4 @@
-﻿competitor_id,name,brand,website,address,postcode,city,latitude,longitude,distance_walk_min,distance_bike_min,tier,segment,proposition_notes,last_checked_date
+competitor_id,name,brand,website,address,postcode,city,latitude,longitude,distance_walk_min,distance_bike_min,tier,segment,proposition_notes,last_checked_date
 comp-006,YOGADNA,,https://www.yogadna.nl/,"HygiÃ«aplein 7, 1076 RN Amsterdam, Netherlands",,Amsterdam,52.347902,4.863747,2,1,Tier 1,yoga studio,nearest_location=Amsterdam LABzuid,2026-01-18
 comp-039,Beautiful Yoga (Pop Up),,http://beautiful-yoga.nl/,"Kerkstraat 441, 1017 HZ Amsterdam, Netherlands",,Amsterdam,52.363350,4.900755,4,1,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-091,Anima House,,https://anima-house.com/,"Kerkstraat 393-H, 1017 HX Amsterdam, Netherlands",,Amsterdam,52.363085,4.899358,3,1,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
