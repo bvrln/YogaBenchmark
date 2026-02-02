@@ -1,5 +1,5 @@
 offer_id,competitor_id,offer_type,offer_name,class_type,heat,class_length_min,sessions_included,duration_days,price_eur,price_unit,currency,auto_renew,contract_months,booking_limit,intro_restrictions,usage_limit_type,usage_limit_value,usage_limit_period,contract_type,cancellation_notice_days,class_style,intensity_level,source_url,last_checked_date
-auto-0001,comp-010,unknown,y Book your first class Build your mobility routine Starter EUR 20 off 1st month 4 classes/month EUR,,,,4,,20,,EUR,,,,,classes_per_month,4,month,,,,,https://revive-studio.nl/,2026-02-02
-auto-0002,comp-010,unknown,mobility routine Starter EUR 20 off 1st month 4 classes/month EUR 50/first month Renews at EUR 70/mo,,,,4,,50,,EUR,,,,,classes_per_month,70,month,,,,,https://revive-studio.nl/,2026-02-02
-auto-0003,comp-010,unknown,EUR 20 off 1st month 4 classes/month EUR 50/first month Renews at EUR 70/month Subscribe ✓ Freeze up,,,,4,,70,,EUR,,,,,classes_per_month,70,month,,,,,https://revive-studio.nl/,2026-02-02
-auto-0004,comp-010,membership,Membership,,,,4,,50,,EUR,,1,,,unlimited,,,month_to_month,30,,,https://revive-studio.nl/,2026-02-02
+auto-0001,comp-010,pack,4-class pack (30d valid),pilates,none,50,4,30,20,,EUR,,,,,,,,,,,mat_pilates,moderate,https://revive-studio.nl/,2026-02-02
+auto-0002,comp-010,membership,Starter membership (4x/month),pilates,none,50,4,30,50,month,EUR,,1,,,classes_per_month,4,month,month_to_month,30,mat_pilates,moderate,https://revive-studio.nl/,2026-02-02
+auto-0003,comp-010,membership,Unlimited membership (monthly),pilates,none,50,,30,70,month,EUR,,1,,,unlimited,,,month_to_month,30,mat_pilates,moderate,https://revive-studio.nl/,2026-02-02
+auto-0004,comp-010,intro,Intro offer (4x),pilates,none,50,4,30,50,,EUR,,,,,classes_per_month,4,month,intro,0,mat_pilates,moderate,https://revive-studio.nl/,2026-02-02

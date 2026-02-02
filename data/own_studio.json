@@ -1,64 +1,84 @@
 {
-  "name": "Movements Yoga",
-  "locations": [
-    "Amsterdam Vondelpark",
-    "Amsterdam City",
-    "Amsterdam LABzuid",
-    "Haarlem"
-  ],
-  "proposition": [
-    "Boutique hot yoga + hot pilates studios",
-    "Heated rooms (30–40C), premium instructor experience",
-    "Teacher consultation before/after class",
-    "Special classes available (included for Unlimited)"
-  ],
-  "packages": [
+  "competitor_id": "our-studio",
+  "name": "Movement's Yoga",
+  "brand": "Movement's Yoga",
+  "website": "https://movementsyoga.nl",
+  "address": "De Pijp, Amsterdam",
+  "city": "Amsterdam",
+  "segment": "hot yoga",
+  "proposition": "Boutique hot yoga and pilates studios with heated rooms and premium instruction",
+  "offers": [
     {
-      "name": "Trial",
-      "price_eur": "10.00",
-      "notes": "1 class, new residents only"
+      "offer_id": "own-001",
+      "competitor_id": "our-studio",
+      "offer_type": "drop_in",
+      "offer_name": "Drop-in class",
+      "class_type": "hot_yoga",
+      "heat": "hot",
+      "class_length_min": "60",
+      "sessions_included": "1",
+      "duration_days": "",
+      "price_eur": "25",
+      "price_unit": "class",
+      "currency": "EUR",
+      "usage_limit_type": "",
+      "contract_type": "",
+      "class_style": "vinyasa_flow",
+      "intensity_level": "moderate"
     },
     {
-      "name": "Single class",
-      "price_eur": "25.00",
-      "notes": "1 hot yoga or hot pilates class"
+      "offer_id": "own-002",
+      "competitor_id": "our-studio",
+      "offer_type": "pack",
+      "offer_name": "10-class pack (90d valid)",
+      "class_type": "hot_yoga",
+      "heat": "hot",
+      "class_length_min": "60",
+      "sessions_included": "10",
+      "duration_days": "90",
+      "price_eur": "175",
+      "price_unit": "",
+      "currency": "EUR",
+      "usage_limit_type": "",
+      "contract_type": "",
+      "class_style": "vinyasa_flow",
+      "intensity_level": "moderate"
     },
     {
-      "name": "10-class card (3 months)",
-      "price_eur": "175.00",
-      "notes": "EUR 17.50/class"
+      "offer_id": "own-003",
+      "competitor_id": "our-studio",
+      "offer_type": "membership",
+      "offer_name": "Unlimited membership (28 days)",
+      "class_type": "hot_yoga",
+      "heat": "hot",
+      "class_length_min": "60",
+      "sessions_included": "",
+      "duration_days": "28",
+      "price_eur": "199",
+      "price_unit": "month",
+      "currency": "EUR",
+      "usage_limit_type": "unlimited",
+      "contract_type": "month_to_month",
+      "class_style": "vinyasa_flow",
+      "intensity_level": "moderate"
     },
     {
-      "name": "15-class card (6 months)",
-      "price_eur": "225.00",
-      "notes": "EUR 15.00/class"
-    },
-    {
-      "name": "20-class card (6 months)",
-      "price_eur": "250.00",
-      "notes": "Promo EUR 12.50/class"
-    },
-    {
-      "name": "Movements 5 Membership",
-      "price_eur": "59.00",
-      "notes": "5 classes per 28 days"
-    },
-    {
-      "name": "Movements Daily Membership",
-      "price_eur": "129.00",
-      "notes": "1 class per day"
-    },
-    {
-      "name": "Movements Unlimited Membership",
-      "price_eur": "199.00",
-      "notes": "Unlimited classes, special classes included"
-    },
-    {
-      "name": "Special class",
-      "price_eur": "35.00",
-      "notes": "Included with Unlimited"
+      "offer_id": "own-004",
+      "competitor_id": "our-studio",
+      "offer_type": "intro",
+      "offer_name": "Intro offer (3 weeks unlimited)",
+      "class_type": "hot_yoga",
+      "heat": "hot",
+      "class_length_min": "60",
+      "sessions_included": "",
+      "duration_days": "21",
+      "price_eur": "59",
+      "price_unit": "",
+      "currency": "EUR",
+      "usage_limit_type": "unlimited",
+      "contract_type": "intro",
+      "class_style": "vinyasa_flow",
+      "intensity_level": "moderate"
     }
-  ],
-  "source_url": "https://movementsyoga.com/pricing/",
-  "last_checked_date": "2026-01-17"
+  ]
 }

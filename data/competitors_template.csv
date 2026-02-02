@@ -1,5 +1,5 @@
-competitor_id,name,brand,website,address,postcode,city,latitude,longitude,distance_walk_min,distance_bike_min,tier,segment,proposition_notes,last_checked_date
-comp-006,YOGADNA,,https://www.yogadna.nl/,"Hygiëaplein 7, 1076 RN Amsterdam, Netherlands",,Amsterdam,52.347902,4.863747,2,1,Tier 1,yoga studio,nearest_location=Amsterdam LABzuid,2026-01-18
+﻿competitor_id,name,brand,website,address,postcode,city,latitude,longitude,distance_walk_min,distance_bike_min,tier,segment,proposition_notes,last_checked_date
+comp-006,YOGADNA,,https://www.yogadna.nl/,"HygiÃ«aplein 7, 1076 RN Amsterdam, Netherlands",,Amsterdam,52.347902,4.863747,2,1,Tier 1,yoga studio,nearest_location=Amsterdam LABzuid,2026-01-18
 comp-039,Beautiful Yoga (Pop Up),,http://beautiful-yoga.nl/,"Kerkstraat 441, 1017 HZ Amsterdam, Netherlands",,Amsterdam,52.363350,4.900755,4,1,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-091,Anima House,,https://anima-house.com/,"Kerkstraat 393-H, 1017 HX Amsterdam, Netherlands",,Amsterdam,52.363085,4.899358,3,1,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-112,Pilates Studio Rosita,,https://www.studiorosita.com/,"Milletstraat, 1077 ZA Amsterdam, Netherlands",,Amsterdam,52.345830,4.868938,4,1,Tier 1,yoga studio,nearest_location=Amsterdam LABzuid,2026-01-18
@@ -21,7 +21,7 @@ comp-043,Hot Flow Yoga Zuid,,https://www.hotflowyoga.nl/,"Koninginneweg 221, 107
 comp-068,Vondelpark,,https://www.hetvondelpark.net/,"1071 AA Amsterdam, Netherlands",,Amsterdam,52.357995,4.868648,5,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
 comp-092,Bewust in Beweging,,http://www.bewustinbeweging.com/,"Pieter Cornelisz Hooftstraat 183, 1071 BW Amsterdam, Netherlands",,Amsterdam,52.358681,4.875535,6,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
 comp-095,Arto Esti | Beeldende therapie | EFT & HSP coaching | yin yoga | Amsterdam,,http://www.arto-esti.nl/,"Borgerstraat 102, 1053 PW Amsterdam, Netherlands",,Amsterdam,52.365126,4.865967,6,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
-comp-096,CaSa Motion - GYROTONIC® & GYROKINESIS® Studio,,http://www.casamotion.nl/,"Vondelstraat 11-E, 1054 GC Amsterdam, Netherlands",,Amsterdam,52.362516,4.878620,7,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
+comp-096,CaSa Motion - GYROTONICÂ® & GYROKINESISÂ® Studio,,http://www.casamotion.nl/,"Vondelstraat 11-E, 1054 GC Amsterdam, Netherlands",,Amsterdam,52.362516,4.878620,7,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
 comp-097,"MettaMind | yoga, mindfulness & retraites",,http://www.mettamind.nl/,"Pieter Cornelisz Hooftstraat 183, 1071 BW Amsterdam, Netherlands",,Amsterdam,52.358784,4.875529,6,2,Tier 1,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
 comp-122,Ontdek Yoga Haarlem,,http://www.ontdek-yoga.nl/,"Begijnhof 20, 2011 HE Haarlem, Netherlands",,Amsterdam,52.382329,4.638990,5,2,Tier 1,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-149,Mindfulness Centrum Haarlem,,https://www.mindfulnesscentrumhaarlem.nl/,"Begijnhof 20, 2011 HE Haarlem, Netherlands",,Amsterdam,52.382329,4.638990,5,2,Tier 1,yoga studio,nearest_location=Haarlem,2026-01-18
@@ -102,7 +102,7 @@ comp-063,Hot Flow Yoga City,,,"Oudeschans 5a, 1011 KW Amsterdam, Netherlands",,A
 comp-072,hotyogastudiogooi,,,"Johannes Vermeerstraat 52, 1071 DT Amsterdam, Netherlands",,Amsterdam,52.354406,4.884271,15,5,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-100,Yagoy West | Yoga Your Way,,,"Postjesweg 106-1, 1057 EG Amsterdam, Netherlands",,Amsterdam,52.364447,4.852727,16,5,Tier 2,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
 comp-105,MangalaM Meditation & Yoga,,,"Amsteldijk 82, 1074 JA Amsterdam, Netherlands",,Amsterdam,52.352474,4.908067,15,5,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
-comp-106,"Panta Rhei Studio GYROTONIC®️& GYROKINESIS®️ Pilates, Yoga",,,"Nieuwezijds Voorburgwal 153, 1012 RK Amsterdam, Netherlands",,Amsterdam,52.372413,4.891005,17,5,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
+comp-106,"Panta Rhei Studio GYROTONICÂ®ï¸& GYROKINESISÂ®ï¸ Pilates, Yoga",,,"Nieuwezijds Voorburgwal 153, 1012 RK Amsterdam, Netherlands",,Amsterdam,52.372413,4.891005,17,5,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-107,Studio 191 Amsterdam,,,"Lutmastraat 191B, 1074 TV Amsterdam, Netherlands",,Amsterdam,52.351881,4.903951,14,5,Tier 1,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-129,The Innerwork Lab,,,"Kleverlaan 9, 2023 JC Haarlem, Netherlands",,Amsterdam,52.395870,4.635998,15,5,Tier 1,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-130,Lila Yoga,,,"Oranjeboomstraat 168, 2013 WC Haarlem, Netherlands",,Amsterdam,52.379525,4.622139,14,5,Tier 1,yoga studio,nearest_location=Haarlem,2026-01-18
@@ -121,7 +121,7 @@ comp-176,Strength by Sara (formerly Fit Mama Moves),,,"Connected Haarlem, Koppes
 comp-184,YogaWebshop.com,,,"Ingenieur Lelyweg 14, 2031 CD Haarlem, Netherlands",,Amsterdam,52.386203,4.657496,18,6,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-016,Bluebirds Zuid,,,"Rijnstraat 63 h, 1079 GW Amsterdam, Netherlands",,Amsterdam,52.345835,4.905662,22,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-018,The White Door Studio,,,"Visseringstraat 39-H, 1051 KH Amsterdam, Netherlands",,Amsterdam,52.377086,4.869979,21,7,Tier 2,yoga studio,nearest_location=Amsterdam Vondelpark,2026-01-18
-comp-024,The Practice • Moving & Resting | Yoga Studio,,,"Warmoesstraat 12, 1012 JD Amsterdam, Netherlands",,Amsterdam,52.376235,4.899019,21,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
+comp-024,The Practice â€¢ Moving & Resting | Yoga Studio,,,"Warmoesstraat 12, 1012 JD Amsterdam, Netherlands",,Amsterdam,52.376235,4.899019,21,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-060,Bluebirds,,,"Louise Wentstraat 186, 1018 MS Amsterdam, Netherlands",,Amsterdam,52.364968,4.922397,21,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-079,Karunika Spiritual Center - STUDIO 11,,,"Meerhuizenplein 11, 1078 TB Amsterdam, Netherlands",,Amsterdam,52.347354,4.908251,21,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-110,Fusion Hormoon Yoga,,,"Entrepotdok 220, 1018 AD Amsterdam, Netherlands",,Amsterdam,52.366002,4.922297,22,7,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
@@ -137,7 +137,7 @@ comp-070,Movement Amsterdam,,,"Overschiestraat 188B, 1062 XK Amsterdam, Netherla
 comp-085,Yogabrigade,,,"Oostenburgervoorstraat 53, 1018 MN Amsterdam, Netherlands",,Amsterdam,52.369415,4.922820,24,8,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-108,Victoria (Tory) Hyndman -Tory's Living Room Yoga & Ayurveda,,,"Domselaerstraat 92, 1093 MA Amsterdam, Netherlands",,Amsterdam,52.359727,4.927430,25,8,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-120,The Human Fabrique,,,"Henk van Turnhoutpad 2 Bezorgen op huisnummer 1, 2034 JL Haarlem, Netherlands",,Amsterdam,52.367904,4.639861,25,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
-comp-134,CasaYoga Yoga Privéles in Haarlem,,,"Van 't Hoffstraat 110, 2014 RJ Haarlem, Netherlands",,Amsterdam,52.374944,4.614369,23,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
+comp-134,CasaYoga Yoga PrivÃ©les in Haarlem,,,"Van 't Hoffstraat 110, 2014 RJ Haarlem, Netherlands",,Amsterdam,52.374944,4.614369,23,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-138,Studio Mama Flow,,,"Zaanenstraat 18, 1H, 2022 CP Haarlem, Netherlands",,Amsterdam,52.400744,4.647480,23,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-166,Vlinder Yoga Haarlem e.o.,,,"Lambrecht van Dalelaan 64, 2015 EV Haarlem, Netherlands",,Amsterdam,52.384056,4.607248,25,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-182,Mom in Balance,,,"Wagenweg 146-150, 2012 NK Haarlem, Netherlands",,Amsterdam,52.370216,4.622748,24,8,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
@@ -163,7 +163,7 @@ comp-076,Tula Yoga Amsterdam,,,"Houtrijkstraat 38, 1013 VD Amsterdam, Netherland
 comp-078,Yoga School North,,,"Nachtegaalstraat 157, 1021 EZ Amsterdam, Netherlands",,Amsterdam,52.385420,4.915110,37,12,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-090,Heldhaftig Yoga,,,"Veemkade 1288, 1165 HA Amsterdam, Netherlands",,Amsterdam,52.374095,4.938771,39,12,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
 comp-163,Sluis Gym Haarlem,,,"Surinamepad 240, 2035 VS Haarlem, Netherlands",,Amsterdam,52.360856,4.653155,37,12,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
-comp-160,Yogapraktijk Heemstede,,,"Orchideeënlaan 26, 2106 BJ Heemstede, Netherlands",,Amsterdam,52.360517,4.610800,41,13,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
+comp-160,Yogapraktijk Heemstede,,,"OrchideeÃ«nlaan 26, 2106 BJ Heemstede, Netherlands",,Amsterdam,52.360517,4.610800,41,13,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-169,SensusYoga,,,"Bloemendaalsestraatweg 81, 2082 GC Santpoort-Zuid, Netherlands",,Amsterdam,52.415015,4.628758,42,13,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-177,Jojamis yogavakantie,,,"Boedapeststraat 30, 2034 CZ Haarlem, Netherlands",,Amsterdam,52.356851,4.649519,41,13,Tier 2,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-084,Rumah Yoga,,,"Distelweg 74C, 1031 HH Amsterdam, Netherlands",,Amsterdam,52.392763,4.905740,44,14,Tier 2,yoga studio,nearest_location=Amsterdam City,2026-01-18
@@ -194,3 +194,15 @@ comp-192,timelezz,,,"Haarlemmerstraat 5, 2182 HA Hillegom, Netherlands",,Amsterd
 comp-194,Inner Yoga,,,"Schuilenburg 29, 2135 GJ Hoofddorp, Netherlands",,Amsterdam,52.304071,4.657215,114,37,Tier 3,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-195,My Yoga Studio,,,"Zwartepad 2, 2271 BT Voorburg, Netherlands",,Amsterdam,52.066949,4.361505,501,160,Tier 3,yoga studio,nearest_location=Haarlem,2026-01-18
 comp-186,Hot Yoga The Hague,,,"Turfhaven 3, 2511 DK Den Haag, Netherlands",,Amsterdam,52.077755,4.319143,506,162,Tier 3,yoga studio,nearest_location=Haarlem,2026-01-18
+comp-200,Yoga Moves HOT Central,,https://yogamoves.nl,"Servaasbolwerk 15, 3512 NK Utrecht",3512 NK,Utrecht,52.092876,5.104480,,,Tier 3,hot yoga,Bikram-style Original Hot 38C 60-90min,2026-02-02
+comp-201,Equal Yoga,,https://equalyoga.com,"Oudegracht, Utrecht",,Utrecht,52.092876,5.104480,,,Tier 3,yoga studio,Hot yoga classes,2026-02-02
+comp-202,YG Studios,,https://ygstudios.nl,"Lijnbaan 31, 3012 EK Rotterdam",3012 EK,Rotterdam,51.9225,4.47917,,,Tier 3,hot yoga,Bikram Hot 26 and Hot Flow near Central Station,2026-02-02
+comp-203,Hot Yoga Place,,,"Moltzerhof 2, Rotterdam",,Rotterdam,51.9225,4.47917,,,Tier 3,hot yoga,Hot yoga vinyasa flow restorative,2026-02-02
+comp-204,Balanzs Rotterdam Mariniersweg,,https://balanzs.nl,"Mariniersweg 151, Rotterdam",,Rotterdam,51.9225,4.47917,,,Tier 3,yoga studio,Hot yoga plus variety of styles,2026-02-02
+comp-205,Balanzs Rotterdam Kleiweg,,https://balanzs.nl,"Kleiweg 16, Rotterdam",,Rotterdam,51.9225,4.47917,,,Tier 3,yoga studio,Hot yoga plus variety of styles,2026-02-02
+comp-206,Soul Studio 010,,,"Jonker Fransstraat 134, Rotterdam",,Rotterdam,51.9225,4.47917,,,Tier 3,boutique,Hot yin yoga women only,2026-02-02
+comp-207,Kompassie Yoga,,,"Achterhaven 152, Rotterdam",,Rotterdam,51.9225,4.47917,,,Tier 3,yoga studio,Warm yoga Yin Aerial Vinyasa,2026-02-02
+comp-208,Hot Yoga The Hague,,https://hotyogathehague.com,"Spuiplein 150, 2511 DG Den Haag",2511 DG,Den Haag,52.077106,4.317541,,,Tier 3,hot yoga,Bikram Inferno Hot Pilates Warm Yin 5-10min from station,2026-02-02
+comp-209,Bikram Yoga Haag,,https://bikramnl.com,"Prins Hendrikplein, Den Haag",,Den Haag,52.077106,4.317541,,,Tier 3,hot yoga,Traditional Bikram 26 postures 40C,2026-02-02
+comp-210,Yogaseads,,https://yogaseads.nl,"Near beach, Den Haag",,Den Haag,52.077106,4.317541,,,Tier 3,yoga studio,Hot Studio FAR-infrared heat,2026-02-02
+comp-211,Balanzs Den Haag,,https://balanzs.nl,"Multiple locations, Den Haag",,Den Haag,52.077106,4.317541,,,Tier 3,yoga studio,Wide range of yoga styles,2026-02-02
