@@ -73,21 +73,6 @@ def _price_per_class(offer: dict[str, str], assumed_classes: int = 8) -> str:
 def _build_offer_rows() -> list[dict[str, str]]:
     competitors = {row.get("competitor_id"): row for row in _load_csv(COMPETITORS_PATH)}
     offers = _load_csv(OFFERS_PATH)
-    
-    # Debug to file
-    with open(DATA_DIR / "debug.txt", "w", encoding="utf-8") as f:
-        f.write(f"Competitors: {len(competitors)}\n")
-        f.write(f"Offers: {len(offers)}\n")
-        if competitors:
-            first_key = list(competitors.keys())[0]
-            f.write(f"First comp key: '{first_key}' len={len(first_key) if first_key else 0}\n")
-            f.write(f"First comp repr: {repr(first_key)}\n")
-        if offers:
-            first_id = offers[0].get('competitor_id')
-            f.write(f"First offer id: '{first_id}' len={len(first_id) if first_id else 0}\n")
-            f.write(f"First offer repr: {repr(first_id)}\n")
-            f.write(f"Match: {first_id in competitors}\n")
-            f.write(f"Keys sample: {list(competitors.keys())[:5]}\n")
 
     if not offers:
         offers = _load_csv(SAMPLE_OFFERS_DETAILED_PATH)
