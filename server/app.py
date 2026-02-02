@@ -24,7 +24,7 @@ SAMPLE_OFFERS_PATH = WEB_DIR / "sample_offers.csv"
 SAMPLE_COMPETITORS_PATH = WEB_DIR / "sample_competitors.csv"
 SAMPLE_OFFERS_DETAILED_PATH = WEB_DIR / "sample_offers_detailed.csv"
 PINNED_PATH = DATA_DIR / "pinned_competitors.json"
-OWN_STUDIO_PATH = DATA_DIR / "own_studio.json"
+CLIENT_CONFIG_PATH = DATA_DIR / "client_config.json"
 REFRESH_STATUS_PATH = DATA_DIR / "pricing_refresh_status.json"
 PRICING_CRAWL_PATH = BASE_DIR / "analysis" / "pricing_crawl.py"
 
@@ -267,14 +267,42 @@ def refresh_pricing(payload: dict[str, Any]) -> dict[str, Any]:
     return _load_refresh_status()
 
 
-@app.get("/api/own_studio")
+@app.get("/api/own-studio")
 def get_own_studio() -> dict[str, Any]:
-    if not OWN_STUDIO_PATH.exists():
+    """Get active client studio data from config + CSV."""
+    # Load client config
+    if not CLIENT_CONFIG_PATH.exists():
         return {}
     try:
-        return json.loads(OWN_STUDIO_PATH.read_text(encoding="utf-8"))
+        config = json.loads(CLIENT_CONFIG_PATH.read_text(encoding="utf-8"))
+        active_client_id = config.get("active_client_id")
+        if not active_client_id:
+            return {}
     except json.JSONDecodeError:
         return {}
+    
+    # Load competitor data
+    competitors = _load_csv(COMPETITORS_PATH)
+    competitor = next((c for c in competitors if c.get("competitor_id") == active_client_id), None)
+    if not competitor:
+        return {}
+    
+    # Load offers for this client
+    all_offers = _load_csv(OFFERS_PATH)
+    client_offers = [o for o in all_offers if o.get("competitor_id") == active_client_id]
+    
+    # Build response matching old format
+    return {
+        "competitor_id": active_client_id,
+        "name": competitor.get("name", ""),
+        "brand": competitor.get("brand", ""),
+        "website": competitor.get("website", ""),
+        "address": competitor.get("address", ""),
+        "city": competitor.get("city", ""),
+        "segment": competitor.get("segment", ""),
+        "proposition": competitor.get("proposition_notes", ""),
+        "offers": client_offers
+    }
 
 
 app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")

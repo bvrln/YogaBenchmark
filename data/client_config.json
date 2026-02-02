@@ -1,0 +1,15 @@
+{
+    "active_client_id": "our-studio",
+    "clients": [
+        {
+            "competitor_id": "our-studio",
+            "name": "Movement's Yoga",
+            "subscription_tier": "premium",
+            "dashboard_title": "Movement's Yoga - Market Benchmark",
+            "branding": {
+                "primary_color": "#4a90e2",
+                "logo_url": ""
+            }
+        }
+    ]
+}
