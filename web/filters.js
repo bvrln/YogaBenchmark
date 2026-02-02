@@ -1,4 +1,3 @@
-
 // ============================================================================
 // FILTERS AND SEARCH
 // ============================================================================
@@ -104,7 +103,9 @@ function applyFilters() {
     }
 
     // Re-render competitors table with filtered list
-    renderCompetitorsTable(filtered);
+    if (typeof renderCompetitorRows === 'function') {
+        renderCompetitorRows(filtered);
+    }
 }
 
 // ============================================================================
@@ -125,7 +126,7 @@ function generateTopCompetitors() {
     // Calculate similarity score for each competitor
     const scores = window._competitors.map(comp => {
         const compOffers = window._offers.filter(o => o.competitor_id === comp.competitor_id);
-        if (!compOffers.length) return { competitor: comp, score: 0, breakdown: {} };
+        if (!compOffers.length) return { competitor: comp, score: 0, breakdown: {}, offerCount: 0 };
 
         let totalComparability = 0;
         let offerCount = 0;
@@ -139,11 +140,13 @@ function generateTopCompetitors() {
         // Compare offers
         ownOffers.forEach(ownOffer => {
             compOffers.forEach(compOffer => {
-                const comparability = calculateComparability(ownOffer, compOffer);
-                if (comparability >= 60) {
-                    totalComparability += comparability;
-                    offerCount++;
-                    if (comparability >= 85) breakdown.offerMatches++;
+                if (typeof calculateComparability === 'function') {
+                    const comparability = calculateComparability(ownOffer, compOffer);
+                    if (comparability >= 60) {
+                        totalComparability += comparability;
+                        offerCount++;
+                        if (comparability >= 85) breakdown.offerMatches++;
+                    }
                 }
             });
         });
@@ -220,31 +223,44 @@ function pinTopCompetitors() {
     }
 
     // Add top 5 to pinned competitors
-    window._topCompetitorIds.forEach(id => pinnedCompetitors.add(id));
+    if (typeof pinnedCompetitors !== 'undefined') {
+        window._topCompetitorIds.forEach(id => pinnedCompetitors.add(id));
 
-    // Save to server
-    savePins();
+        // Save to server via fetch
+        fetch('/api/pins', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ competitor_ids: Array.from(pinnedCompetitors) })
+        }).catch(() => { });
 
-    // Re-render
-    if (window._competitors) {
-        renderCompetitorsTable(window._competitors);
+        // Re-render
+        if (window._competitors && typeof renderCompetitorRows === 'function') {
+            renderCompetitorRows(window._competitors);
+        }
+
+        alert(`Pinned top ${window._topCompetitorIds.length} competitors!`);
+    } else {
+        alert('Error: Pinning system not initialized');
     }
-
-    alert(`Pinned top ${window._topCompetitorIds.length} competitors!`);
 }
 
-// Initialize filters and top competitors when data loads
-const originalFetchOffers = window.fetchOffers || (() => { });
-window.fetchOffers = function () {
-    originalFetchOffers();
-    setTimeout(() => {
-        setupFilters();
-        generateTopCompetitors();
-    }, 500);
-};
+// Initialize filters and top competitors when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Wait for app.js to load data
+    const checkDataInterval = setInterval(() => {
+        if (window._competitors && window._offers) {
+            clearInterval(checkDataInterval);
+            setupFilters();
+            generateTopCompetitors();
+        }
+    }, 100);
 
-// Wire up Pin Top 5 button
-const pinTopButton = document.getElementById('pin-top-competitors');
-if (pinTopButton) {
-    pinTopButton.addEventListener('click', pinTopCompetitors);
-}
+    // Timeout after 10 seconds
+    setTimeout(() => clearInterval(checkDataInterval), 10000);
+
+    // Wire up Pin Top 5 button
+    const pinTopButton = document.getElementById('pin-top-competitors');
+    if (pinTopButton) {
+        pinTopButton.addEventListener('click', pinTopCompetitors);
+    }
+});
